@@ -12,6 +12,8 @@ import cv2
 from torchvision.utils import make_grid
 import torchvision.transforms.functional as TF
 import torch.nn.functional as F
+from matplotlib.patches import Polygon
+
 
 def red(x):
     '''
@@ -251,3 +253,8 @@ def im_show():
     plt.savefig(temp_img_name)
     os.system('imgcat ' + temp_img_name)
     os.remove(temp_img_name)
+
+def plotPolys(vert_dicts, per_vert_fn=lambda x: x['average_polygon']):
+    for vert_dict in vert_dicts:
+        plt.gca().add_patch(Polygon(per_vert_fn(x),ec='y',fc='none'))
+
